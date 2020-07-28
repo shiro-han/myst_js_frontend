@@ -1,0 +1,22 @@
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+  background-color: #171a21;
+}
+
+#navigation {
+    background-color: #171a21;
+}
+
+body {
+    background: #294761;
+    background: linear-gradient(to right, #1b2838, #194560);
+}
