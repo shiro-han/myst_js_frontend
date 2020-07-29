@@ -24,3 +24,16 @@ body {
     background: #294761;
     background: linear-gradient(to right, #1b2838, #194560);
 }
+
+.grid-image {
+  margin: 1rem 0;
+}
+
+.grid-title {
+  color: #FFF;
+  font-weight: 300;
+}
+
+.genre-title {
+  color: #FFF;
+}
