@@ -69,26 +69,6 @@ const getGenreList = () => {
         .catch(error => console.log('error', error));
 }
 
-const getGamesForGenre = (genreID) => {
-    let myHeaders = new Headers();
-    myHeaders.append("user-key", API_KEY);
-    myHeaders.append("Content-Type", "text/plain");
-
-    const raw = `fields id, cover.url, name, genres; where genres = ${genreID}; limit 25; sort popularity desc;`;
-
-    const requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-    };
-
-    fetch(CORS_URL + "https://api-v3.igdb.com/games/", requestOptions)
-        .then(resp => resp.json())
-        .then(json => console.log(json))
-        .catch(error => console.log('error', error));
-}
-
 const getPopularGames = () => {
     let myHeaders = new Headers();
     myHeaders.append("user-key", API_KEY);
@@ -105,7 +85,7 @@ const getPopularGames = () => {
 
     fetch(CORS_URL + "https://api-v3.igdb.com/games", requestOptions)
         .then(resp => resp.json())
-        .then(json => {console.log(json); json.forEach(game => renderGameToCommunityCarousel(game))})
+        .then(json => json.forEach(game => renderGameToCommunityCarousel(game)))
         .catch(error => console.log('error', error));
 }
 
@@ -167,18 +147,8 @@ const pElement = (game, element) => {
     return p;
 }
 
-// const platformsElement = (array) => {
-//     return array.map(platform => `${platform.name}`).join(', ')
-// }
-
 const imgURL = (url, size = 'cover_big') => {
     return 'http:' + url.replace('thumb', size)
-}
-
-const fetchRailsUsers = () => {
-    fetch (RAILS_URL + 'users')
-        .then(resp => resp.json())
-        .then(json => console.log(json))
 }
 
 const postGameToRails = (gameObj) => {
@@ -219,29 +189,6 @@ const addGameToCollection = (userID, railsID) => {
     }
 
     fetch(RAILS_URL + 'user_games', requestOptions)
-        .then(resp => resp.json())
-        .then(json => console.log(json))
-}
-
-const registerUser = (userObj) => {
-    let myHeaders = new Headers();
-    myHeaders.append('content-type', 'application/json');
-    myHeaders.append('accept', 'application/json')
-
-    let bodyObj = {
-        username: userObj.username,
-        bio: userObj.bio,
-        email: userObj.email,
-        profile_pic: userObj.profile_pic
-    }
-
-    const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: JSON.stringify(bodyObj)
-    }
-
-    fetch(RAILS_URL + 'users', requestOptions)
         .then(resp => resp.json())
         .then(json => console.log(json))
 }
