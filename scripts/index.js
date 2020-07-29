@@ -1,7 +1,8 @@
-const CORS_URL = 'https://cors-anywhere.herokuapp.com/'
+const CORS_URL = 'https://damp-taiga-79758.herokuapp.com/'
 const API_URL = "https://api-v3.igdb.com/games"
 const RAILS_URL = "http://localhost:3000/"
 const API_KEY = 'cfc722389b379cdc9ee497832c009ac3'
+let genreList = []
 
 const getGame = (id) => {
     let myHeaders = new Headers();
@@ -60,18 +61,14 @@ const getGenreList = () => {
         redirect: 'follow'
     };
 
-    let genreList = fetch(CORS_URL + "https://api-v3.igdb.com/genres/", requestOptions)
+    fetch(CORS_URL + "https://api-v3.igdb.com/genres/", requestOptions)
         .then(response => response.json())
         .then(json => {
-            let genreArray = []
             for (let obj in json) {
-                genreArray.push(json[obj])
+                genreList.push(json[obj])
             }
-            return genreArray
         })
         .catch(error => console.log('error', error));
-
-    return genreList
 }
 
 const getGamesForGenre = (genreID) => {
