@@ -50,16 +50,36 @@ const getGamesForGenre = (genreID) => {
 }
 
 const renderPage = (games) => {
-    const container = document.querySelector('.container.pt-3.mt-3')
-    for (let i = 0; i < games.length; i++){
-        let x = 0;
-        
-        for (let x = 0; x < 3; x++) {
-            const element = array[i];
-            
-        }
-        console.log(games[i])
-    }
+    console.log(games)
+    let game = 0
+    let n = 4
+    for (let i = 0; i < n;)
+    // <div class="row">
+    //     <div class="col-3 text-center">
+    //         <a href="/game.html">
+    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
+    //             <p class ="grid-title">Rune Factory 4 Special</p>
+    //         </a>
+    //     </div>
+    //     <div class="col-3">
+    //         <a href="/game.html">
+    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
+    //             <p class ="grid-title">Rune Factory 4 Special</p>
+    //         </a>
+    //     </div>
+    //     <div class="col-3">
+    //         <a href="/game.html">
+    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
+    //             <p class ="grid-title">Rune Factory 4 Special</p>
+    //         </a>
+    //     </div>
+    //     <div class="col-3">
+    //         <a href="/game.html">
+    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
+    //             <p class ="grid-title">Rune Factory 4 Special</p>
+    //         </a>
+    //     </div>
+    // </div>
 }
 
 const imgURL = (url, size = 'cover_big') => {
