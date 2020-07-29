@@ -28,15 +28,13 @@ const renderGenresNav = (genres) => {
     const genreDropdown = document.querySelector('.dropdown-menu')
     genres.forEach(genre => {
         let a = document.createElement('a')
-        let divider = document.createElement('div')
         a.className = "dropdown-item"
         a.setAttribute('href', "/genre.html")
         a.innerText = genre.name
-        divider.className = "dropdown-divider"
-        genreDropdown.append(a, divider)
+        genreDropdown.append(a)
     })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+    getGenresNav()
 })
