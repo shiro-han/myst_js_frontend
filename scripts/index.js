@@ -243,5 +243,5 @@ const registerUser = (userObj) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
+    getPopularGames()
 })
