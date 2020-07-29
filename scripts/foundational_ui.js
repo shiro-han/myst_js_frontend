@@ -38,5 +38,5 @@ const renderGenresNav = (genres) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    
+    getGenresNav()
 })
