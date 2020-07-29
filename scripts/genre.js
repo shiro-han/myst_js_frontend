@@ -4,7 +4,9 @@ const RAILS_URL = "http://localhost:3000/"
 const API_KEY = 'cfc722389b379cdc9ee497832c009ac3'
 const gameGrid = document.getElementById('game-grid')
 
+console.log(document.cookie)
 let genreID = parseInt(document.cookie.split('genre=')[1], 10)
+let genreName = (document.cookie.split('; ')[1]).split('genre_name=')[1]
 let genreList = []
 
 const getGenreList = () => {
@@ -53,6 +55,8 @@ const getGamesForGenre = (genreID) => {
 const renderPage = (games) => {
     let j = 0;
     let n = 4;
+    let title = document.querySelector('.genre-title')
+    title.innerText = genreName
     let newRow = document.createElement('div')
     newRow.className = 'row';
     for (let i=0; i < games.length; i++) {
@@ -92,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', function(e) {
         if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
             e.preventDefault()
-            document.cookie = `genre=${e.target.dataset.id};genre_name=${e.target.innerText}`
+            document.cookie = `genre=${e.target.dataset.id}`
+            document.cookie = `genre_name=${e.target.innerText}`
             window.location.replace("/genre.html")
         }
     })
