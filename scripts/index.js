@@ -20,8 +20,7 @@ const getGame = (id) => {
     fetch(CORS_URL+API_URL, requestOptions)
         .then(resp => resp.json())
         .then(json => {
-            console.log(json[0]); 
-            renderGame(json[0]);
+            console.log(json[0]);
         })
         .catch(error => console.log('error', error));
 }
@@ -102,25 +101,54 @@ const getPopularGames = () => {
 
     fetch(CORS_URL + "https://api-v3.igdb.com/games", requestOptions)
         .then(resp => resp.json())
-        .then(json => json.forEach(game => renderGameToCommunityCarousel(game)))
+        .then(json => {console.log(json); json.forEach(game => renderGameToCommunityCarousel(game))})
         .catch(error => console.log('error', error));
 }
 
 const renderGameToCommunityCarousel = (game) => {
     const carousel = document.querySelector('#community-carousel')
-    let row = document.createElement('div')
-    row.className = 'row'
-    row.innerHTML = `
-        <div class="col-3">
-            <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
-        </div>
-        <div class="col-9">
-            <h2><u>${game.name}</u></h2>
-            <h3>Now Available</h3>
-        </div>
-    `
-    row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
-    carousel.appendChild(row)
+    if (!carousel.children[0]) {
+        let item = document.createElement('div');
+        item.className = 'carousel-item active'
+        let container = document.createElement('div')
+        container.className = 'container'
+        item.appendChild(container)
+        let row = document.createElement('div')
+        row.className = 'row'
+        row.innerHTML = `
+            <div class="col-3">
+                <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
+            </div>
+            <div class="col-9">
+                <h2><u>${game.name}</u></h2>
+                <h3>Now Available</h3>
+            </div>
+        `
+        row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
+        container.appendChild(row)
+        carousel.appendChild(item)
+    }
+    else {
+        let item = document.createElement('div');
+        item.className = 'carousel-item'
+        let container = document.createElement('div')
+        container.className = 'container'
+        item.appendChild(container)
+        let row = document.createElement('div')
+        row.className = 'row'
+        row.innerHTML = `
+            <div class="col-3">
+                <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
+            </div>
+            <div class="col-9">
+                <h2><u>${game.name}</u></h2>
+                <h3>Now Available</h3>
+            </div>
+        `
+        row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
+        container.appendChild(row)
+        carousel.appendChild(item)
+    }
 }
 
 const pElement = (game, element) => {
