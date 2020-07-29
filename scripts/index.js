@@ -104,8 +104,8 @@ const renderGameToCommunityCarousel = (game) => {
                 <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
             </div>
             <div class="col-9">
-                <h2><u>${game.name}</u></h2>
-                <h3>Now Available</h3>
+                <h2 class="app-text"><u>${game.name}</u></h2>
+                <h3 class="app-text">Now Available</h3>
             </div>
         `
         row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
@@ -125,8 +125,8 @@ const renderGameToCommunityCarousel = (game) => {
                 <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
             </div>
             <div class="col-9">
-                <h2><u>${game.name}</u></h2>
-                <h3>Now Available</h3>
+                <h2 class="app-text"><u>${game.name}</u></h2>
+                <h3 class="app-text">Now Available</h3>
             </div>
         `
         row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))

@@ -3,6 +3,45 @@ body {
   height: 100%;
 }
 
+body {
+  background: #294761;
+  background: linear-gradient(to right, #1b2838, #194560);
+}
+
+.navbar-brand {
+  font-family: 'Orbitron', sans-serif!important;
+}
+
+.grid-image {
+margin: 1rem 0;
+}
+
+.grid-title {
+color: #FFF;
+font-weight: 300;
+}
+
+.genre-title {
+color: #FFF;
+}
+
+.scrollable-menu {
+height: auto;
+max-height: 200px;
+overflow-x: hidden;
+}
+
+.add-bar {
+background: #171a21;
+border: #171a21;
+padding: 1rem;
+border-radius: 15px;
+}
+
+.app-text {
+  color: #FFF;
+}
+
 #page-content {
   flex: 1 0 auto;
 }
@@ -14,39 +53,4 @@ body {
 
 #navigation {
     background-color: #171a21;
-}
-
-.navbar-brand {
-    font-family: 'Orbitron', sans-serif!important;
-}
-
-body {
-    background: #294761;
-    background: linear-gradient(to right, #1b2838, #194560);
-}
-
-.grid-image {
-  margin: 1rem 0;
-}
-
-.grid-title {
-  color: #FFF;
-  font-weight: 300;
-}
-
-.genre-title {
-  color: #FFF;
-}
-
-.scrollable-menu {
-  height: auto;
-  max-height: 200px;
-  overflow-x: hidden;
-}
-
-.add-bar {
-  background: #171a21;
-  border: #171a21;
-  padding: 1rem;
-  border-radius: 15px;
 }
