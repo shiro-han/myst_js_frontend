@@ -2,6 +2,7 @@ const CORS_URL = 'https://damp-taiga-79758.herokuapp.com/'
 const API_URL = "https://api-v3.igdb.com/games"
 const RAILS_URL = "http://localhost:3000/"
 const API_KEY = 'cfc722389b379cdc9ee497832c009ac3'
+const gameGrid = document.getElementById('game-grid')
 
 let genreID = parseInt(document.cookie.split('genre=')[1], 10)
 let genreList = []
@@ -50,36 +51,21 @@ const getGamesForGenre = (genreID) => {
 }
 
 const renderPage = (games) => {
-    console.log(games)
-    let game = 0
-    let n = 4
-    for (let i = 0; i < n;)
-    // <div class="row">
-    //     <div class="col-3 text-center">
-    //         <a href="/game.html">
-    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
-    //             <p class ="grid-title">Rune Factory 4 Special</p>
-    //         </a>
-    //     </div>
-    //     <div class="col-3">
-    //         <a href="/game.html">
-    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
-    //             <p class ="grid-title">Rune Factory 4 Special</p>
-    //         </a>
-    //     </div>
-    //     <div class="col-3">
-    //         <a href="/game.html">
-    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
-    //             <p class ="grid-title">Rune Factory 4 Special</p>
-    //         </a>
-    //     </div>
-    //     <div class="col-3">
-    //         <a href="/game.html">
-    //             <img class="grid-image" src="https://images.igdb.com/igdb/image/upload/t_cover_big/co203s.jpg" style="width: 10rem;">
-    //             <p class ="grid-title">Rune Factory 4 Special</p>
-    //         </a>
-    //     </div>
-    // </div>
+    let j = 0;
+    let n = 4;
+    let newRow = document.createElement('div')
+    newRow.className = 'row';
+    for (let i=0; i < games.length; i++) {
+        let newDiv = returnGameDiv(games[i]);
+        newRow.append(newDiv);
+        j++;
+        if (j === n) {
+            gameGrid.append(newRow);
+            newRow = document.createElement('div');
+            newRow.className = 'row';
+            j = 0;
+        }
+    }
 }
 
 const imgURL = (url, size = 'cover_big') => {
@@ -89,10 +75,10 @@ const imgURL = (url, size = 'cover_big') => {
 const returnGameDiv = (game) => {
     const gameDiv = document.createElement('div')
     gameDiv.className = "col-3 text-center"
-    let a = doucment.createElement('a')
+    let a = document.createElement('a')
     a.setAttribute('href', '/game.html')
     a.innerHTML = `
-        <img class="grid-image" src="${game.cover.url}" style="width: 10rem;">
+        <img class="grid-image" src="${imgURL(game.cover.url)}" style="width: 10rem;">
         <p class ="grid-title">${game.name}</p>
     `
     gameDiv.appendChild(a)
@@ -106,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', function(e) {
         if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
             e.preventDefault()
-            document.cookie = `genre=${e.target.dataset.id}`
+            document.cookie = `genre=${e.target.dataset.id};genre_name=${e.target.innerText}`
             window.location.replace("/genre.html")
         }
     })
