@@ -31,6 +31,7 @@ const renderGenresNav = (genres) => {
         a.className = "dropdown-item"
         a.setAttribute('href', "/genre.html")
         a.innerText = genre.name
+        a.dataset.id = genre.id
         genreDropdown.append(a)
     })
 }
