@@ -22,7 +22,7 @@ const getGame = (id) => {
         .then(json => {
             console.log(json[0]); 
             renderGame(json[0]); 
-            postGameToRails(json[0])
+            postGameToRails(json[0]);
         })
         .catch(error => console.log('error', error));
 }
