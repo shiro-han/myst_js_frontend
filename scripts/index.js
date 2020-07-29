@@ -18,9 +18,13 @@ const getGame = (id) => {
     };
     
     fetch(CORS_URL+API_URL, requestOptions)
-    .then(resp => resp.json())
-    .then(json => {console.log(json[0]); renderGame(json[0]); postGameToRails(json[0])})
-    .catch(error => console.log('error', error));
+        .then(resp => resp.json())
+        .then(json => {
+            console.log(json[0]); 
+            renderGame(json[0]); 
+            postGameToRails(json[0])
+        })
+        .catch(error => console.log('error', error));
 }
 
 const runSearch = (term) => {
