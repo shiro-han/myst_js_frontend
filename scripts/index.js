@@ -21,8 +21,7 @@ const getGame = (id) => {
         .then(resp => resp.json())
         .then(json => {
             console.log(json[0]); 
-            renderGame(json[0]); 
-            postGameToRails(json[0]);
+            renderGame(json[0]);
         })
         .catch(error => console.log('error', error));
 }
@@ -92,7 +91,7 @@ const getPopularGames = () => {
     myHeaders.append("user-key", API_KEY);
     myHeaders.append("Content-Type", "text/plain");
 
-    const raw = "fields id, cover.url, name; limit 10; sort popularity desc;";
+    const raw = "fields id, cover.url, name, genres.name, platforms.name; limit 3; sort popularity desc;";
 
     const requestOptions = {
     method: 'POST',
@@ -103,25 +102,42 @@ const getPopularGames = () => {
 
     fetch(CORS_URL + "https://api-v3.igdb.com/games", requestOptions)
         .then(resp => resp.json())
-        .then(json => console.log(json))
+        .then(json => json.forEach(game => renderGameToCommunityCarousel(game)))
         .catch(error => console.log('error', error));
 }
 
-const renderGame = (game) => {
-    let div = document.createElement('div')
-    div.dataset.id = game.id
-    div.innerHTML = `
-    <h1>${game.name}</h1>
-    <h2>Console: ${platformsString(game.platforms)}</h2>
-    <p>${game.summary}</p>
-    <img src = ${imgURL(game.cover.url)}>
+const renderGameToCommunityCarousel = (game) => {
+    const carousel = document.querySelector('#community-carousel')
+    let row = document.createElement('div')
+    row.className = 'row'
+    row.innerHTML = `
+        <div class="col-3">
+            <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
+        </div>
+        <div class="col-9">
+            <h2><u>${game.name}</u></h2>
+            <h3>Now Available</h3>
+        </div>
     `
-    document.body.appendChild(div)
+    row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
+    carousel.appendChild(row)
 }
 
-const platformsString = (array) => {
-    return array.map(platform => `${platform.name}`).join(', ')
+const pElement = (game, element) => {
+    let p = document.createElement('p')
+    p.innerText = `${element}: `
+    game[element].forEach(element => {
+        let span = document.createElement('span');
+        span.className = 'badge badge-secondary'
+        span.innerText = element.name
+        p.appendChild(span);
+    })
+    return p;
 }
+
+// const platformsElement = (array) => {
+//     return array.map(platform => `${platform.name}`).join(', ')
+// }
 
 const imgURL = (url, size = 'cover_big') => {
     return 'http:' + url.replace('thumb', size)
@@ -197,3 +213,7 @@ const registerUser = (userObj) => {
         .then(resp => resp.json())
         .then(json => console.log(json))
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+})
