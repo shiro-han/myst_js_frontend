@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', function(e) {
         if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
             e.preventDefault()
-            document.cookie = `genre=${e.target.innerText}`
+            document.cookie = `genre=${e.target.dataset.id}`
             window.location.replace("/genre.html")
         }
     })
