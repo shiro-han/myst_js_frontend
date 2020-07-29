@@ -43,3 +43,10 @@ body {
   max-height: 200px;
   overflow-x: hidden;
 }
+
+.add-bar {
+  background: #171a21;
+  border: #171a21;
+  padding: 1rem;
+  border-radius: 15px;
+}
