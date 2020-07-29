@@ -47,22 +47,31 @@ const runSearch = (term) => {
 
 const getGenreList = () => {
     let myHeaders = new Headers();
-    myHeaders.append("user-key", API_KEY);
+    myHeaders.append("user-key", "cfc722389b379cdc9ee497832c009ac3");
     myHeaders.append("Content-Type", "text/plain");
+    myHeaders.append("Cookie", "__cfduid=dc4622210358dc9f2e6fbe9dcb5a930ca1595946479");
 
-    const raw = "fields id, name; limit 100;";
+    const raw = "fields name; limit 100;";
 
     const requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
     };
 
-    fetch(CORS_URL + "https://api-v3.igdb.com/genres/", requestOptions)
-        .then(resp => resp.json())
-        .then(json => console.log(json))
+    let genreList = fetch(CORS_URL + "https://api-v3.igdb.com/genres/", requestOptions)
+        .then(response => response.json())
+        .then(json => {
+            let genreArray = []
+            for (let obj in json) {
+                genreArray.push(json[obj])
+            }
+            return genreArray
+        })
         .catch(error => console.log('error', error));
+
+    return genreList
 }
 
 const getGamesForGenre = (genreID) => {
@@ -243,5 +252,16 @@ const registerUser = (userObj) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const genreList = getGenreList()
+    
     getPopularGames()
+    
+    document.addEventListener('click', function(e) {
+        if (genreList.includes(e.target.innerText)) {
+            e.preventDefault()
+            document.cookie = `genre=${e.target.innerText}`
+            window.location.replace("/genre.html")
+        }
+    })
+    
 })
