@@ -64,9 +64,7 @@ const getGenreList = () => {
     fetch(CORS_URL + "https://api-v3.igdb.com/genres/", requestOptions)
         .then(response => response.json())
         .then(json => {
-            for (let obj in json) {
-                genreList.push(json[obj])
-            }
+            genreList = json
         })
         .catch(error => console.log('error', error));
 }
@@ -249,12 +247,12 @@ const registerUser = (userObj) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const genreList = getGenreList()
     
+    getGenreList()
     getPopularGames()
     
     document.addEventListener('click', function(e) {
-        if (genreList.includes(e.target.innerText)) {
+        if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
             e.preventDefault()
             document.cookie = `genre=${e.target.innerText}`
             window.location.replace("/genre.html")
