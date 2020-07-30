@@ -42,8 +42,20 @@ border-radius: 15px;
   color: #edf1f4;
 }
 
+.app-text:hover {
+  text-decoration: none;
+}
+
 .error {
   color: red!important;
+}
+
+.card {
+  background: #171a21;
+}
+
+.card-text {
+ font-size: 2rem;
 }
 
 #page-content {
