@@ -139,7 +139,27 @@ const renderGame = (game) => {
         `
         carousel.appendChild(div)
     })
+}
 
+const addGameToCollection = (userID, railsID) => {
+    let myHeaders = new Headers();
+    myHeaders.append('content-type', 'application/json');
+    myHeaders.append('accept', 'application/json')
+
+    let bodyObj = {
+        user_id: userID,
+        game_id: railsID
+    }
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(bodyObj)
+    }
+
+    fetch(RAILS_URL + 'user_games', requestOptions)
+        .then(resp => resp.json())
+        .then(json => console.log(json))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -147,6 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
     addBttn = document.querySelector('#addCollection')
     addBttn.addEventListener('click', (e) => {
         if (!!userID){
+            let railsID = parseInt(container.dataset.railsId, 10)
+            addGameToCollection(userID, railsID)
             window.location.replace('/collection.html')
         } else {
             window.location.replace('/login.html')
