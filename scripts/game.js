@@ -169,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!!userID){
             let railsID = parseInt(container.dataset.railsId, 10)
             addGameToCollection(userID, railsID)
-            
         } else {
             window.location.replace('/login.html')
         }
