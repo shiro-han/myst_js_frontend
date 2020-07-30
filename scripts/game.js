@@ -1,7 +1,7 @@
 const API_URL = "https://api-v3.igdb.com/games"
 const gameID = parseInt(document.cookie.split('game=')[1], 10)
 
-const printGame = (id) => {
+const getGameRender = (id) => {
     let myHeaders = new Headers();
     myHeaders.append("user-key", API_KEY);
     myHeaders.append("Content-Type", "text/plain");
@@ -18,12 +18,12 @@ const printGame = (id) => {
     fetch(CORS_URL+API_URL, requestOptions)
         .then(resp => resp.json())
         .then(json => {
-            console.log(json[0]);
+            renderGame(json[0]);
         })
         .catch(error => console.log('error', error));
 }
 
-const getGame = (id) => {
+const getGamePost = (id) => {
     let myHeaders = new Headers();
     myHeaders.append("user-key", API_KEY);
     myHeaders.append("Content-Type", "text/plain");
@@ -55,11 +55,11 @@ const gameRailsDBChecker = (games, id) => {
     if (games.some(game => game.api_id === id))
     {
         console.log('game already exists in rails');
-        printGame(gameID)
+        getGameRender(gameID)
     }
     else {
         console.log('uploading game to rails')
-        getGame(gameID)
+        getGamePost(gameID)
     }
 }
 
@@ -81,7 +81,7 @@ const postGameToRails = (gameObj) => {
 
     fetch(RAILS_URL + 'games', requestOptions)
         .then(resp => resp.json())
-        .then(json => console.log(json))
+        .then(json => getGameRender(json.api_id))
 }
 
 const renderGame = (game) => {
@@ -107,7 +107,6 @@ const renderGame = (game) => {
     </div>
     <p><u>Summary:</u></p>
     <p>${game.summary}</p>
-    <p><u>Story Line:</u></p>
     `
     let genres = container.querySelector('#genres')
     genres.appendChild(pElement(game, 'genres'))
@@ -124,22 +123,18 @@ const renderGame = (game) => {
 
     const carousel = document.querySelector('#screenshots')
     game.screenshots.forEach(screenshot => {
-        
+        let div = document.createElement('div')
+        if (!carousel.children[0]) {
+            div.className = "carousel-item active"
+        } else {
+            div.className = "carousel-item"
+        }
+        div.innerHTML = `
+        <img src="${imgURL(screenshot.url, 'screenshot_med')}" class="center-block w-auto">
+        `
+        carousel.appendChild(div)
     })
 
-}
-
-const pElement = (game, element) => {
-    let p = document.createElement('p')
-    p.innerText = `${element}: `
-    game[element].forEach(element => {
-        let span = document.createElement('span');
-        span.className = 'badge badge-secondary'
-        span.innerText = element.name
-        span.dataset.id = element.id
-        p.appendChild(span);
-    })
-    return p;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

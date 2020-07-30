@@ -132,19 +132,6 @@ const renderGameToCommunityCarousel = (game) => {
     }
 }
 
-const pElement = (game, element) => {
-    let p = document.createElement('p')
-    p.innerText = `${element}: `
-    game[element].forEach(element => {
-        let span = document.createElement('span');
-        span.className = 'badge badge-secondary'
-        span.innerText = element.name
-        span.dataset.id = element.id
-        p.appendChild(span);
-    })
-    return p;
-}
-
 const addGameToCollection = (userID, railsID) => {
     let myHeaders = new Headers();
     myHeaders.append('content-type', 'application/json');

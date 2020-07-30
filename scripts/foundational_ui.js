@@ -44,6 +44,19 @@ const imgURL = (url, size = 'cover_big') => {
     return 'http:' + url.replace('thumb', size)
 }
 
+const pElement = (game, attr) => {
+    let p = document.createElement('p')
+    p.innerText = `${attr.charAt(0).toUpperCase() + attr.slice(1)}: `
+    game[attr].forEach(element => {
+        let span = document.createElement('span');
+        span.className = 'badge badge-secondary'
+        span.innerText = element.name
+        span.dataset.id = element.id
+        p.appendChild(span);
+    })
+    return p;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     getGenresNav()
 
