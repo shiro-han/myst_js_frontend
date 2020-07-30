@@ -3,31 +3,7 @@ const gameGrid = document.getElementById('game-grid')
 
 console.log(document.cookie)
 let genreID = parseInt(document.cookie.split('genre=')[1], 10)
-let genreName = (document.cookie.split('; ')[1]).split('genre_name=')[1]
-let genreList = []
-
-const getGenreList = () => {
-    let myHeaders = new Headers();
-    myHeaders.append("user-key", "cfc722389b379cdc9ee497832c009ac3");
-    myHeaders.append("Content-Type", "text/plain");
-    myHeaders.append("Cookie", "__cfduid=dc4622210358dc9f2e6fbe9dcb5a930ca1595946479");
-
-    const raw = "fields name; limit 100;";
-
-    const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-    fetch(CORS_URL + "https://api-v3.igdb.com/genres/", requestOptions)
-        .then(response => response.json())
-        .then(json => {
-            genreList = json
-        })
-        .catch(error => console.log('error', error));
-}
+let genreName = document.cookie.split('genre_name=')[1]
 
 const getGamesForGenre = (genreID) => {
     let myHeaders = new Headers();

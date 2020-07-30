@@ -2,6 +2,8 @@ const CORS_URL = 'https://damp-taiga-79758.herokuapp.com/'
 const RAILS_URL = "http://localhost:3000/"
 const API_KEY = 'cfc722389b379cdc9ee497832c009ac3'
 
+let genreList = []
+
 $(function(){
     $("#navbar").load("foundational_ui.html #navigation"); 
     $("#footer").load("foundational_ui.html #sticky-footer"); 
@@ -57,7 +59,31 @@ const pElement = (game, attr) => {
     return p;
 }
 
+const getGenreList = () => {
+    let myHeaders = new Headers();
+    myHeaders.append("user-key", "cfc722389b379cdc9ee497832c009ac3");
+    myHeaders.append("Content-Type", "text/plain");
+    myHeaders.append("Cookie", "__cfduid=dc4622210358dc9f2e6fbe9dcb5a930ca1595946479");
+
+    const raw = "fields name; limit 100;";
+
+    const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch(CORS_URL + "https://api-v3.igdb.com/genres/", requestOptions)
+        .then(response => response.json())
+        .then(json => {
+            genreList = json
+        })
+        .catch(error => console.log('error', error));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    getGenreList()
     getGenresNav()
 
     document.addEventListener("click", function(e) {
