@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 document.addEventListener("click", function(e) {
-    if (e.target.innerText === "Library" || "Log In") {
+    if (e.target.innerText === "Log In" || e.target.innerText === "Library") {
         e.preventDefault()
         if (document.cookie.includes('userid=')) {
             window.location.replace('/collection.html')
