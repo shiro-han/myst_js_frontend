@@ -9,7 +9,7 @@ const getGamesForSearch = (searchTerm) => {
     myHeaders.append("user-key", API_KEY);
     myHeaders.append("Content-Type", "text/plain");
 
-    const raw = `fields game.id, game.name, game.cover.url; search "${searchTerm}"; limit 50; where game.category = 0;`;
+    const raw = `fields game.id, game.name, game.cover.url; search "${searchTerm}"; where themes != (42); limit 50; where game.category = 0;`;
 
     const requestOptions = {
     method: 'POST',

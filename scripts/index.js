@@ -48,7 +48,7 @@ const getPopularGames = () => {
     myHeaders.append("user-key", API_KEY);
     myHeaders.append("Content-Type", "text/plain");
 
-    const raw = "fields id, cover.url, name, genres.name, platforms.name; limit 3; sort popularity desc;";
+    const raw = "fields id, cover.url, name, genres.name, platforms.name; where themes != (42); limit 3; sort popularity desc;";
 
     const requestOptions = {
     method: 'POST',
