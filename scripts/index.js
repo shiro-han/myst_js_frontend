@@ -142,6 +142,7 @@ const pElement = (game, element) => {
         let span = document.createElement('span');
         span.className = 'badge badge-secondary'
         span.innerText = element.name
+        span.dataset.id = element.id
         p.appendChild(span);
     })
     return p;
