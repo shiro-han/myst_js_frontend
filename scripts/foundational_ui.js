@@ -2,12 +2,37 @@ const CORS_URL = 'https://damp-taiga-79758.herokuapp.com/'
 const RAILS_URL = "http://localhost:3000/"
 const API_KEY = 'cfc722389b379cdc9ee497832c009ac3'
 
+let userID;
+let gameID;
+let genreID;
+let genreName;
+let searchTerm;
 let genreList = []
 
 $(function(){
     $("#navbar").load("foundational_ui.html #navigation"); 
     $("#footer").load("foundational_ui.html #sticky-footer"); 
 });
+
+function getCookies() {
+    let cookieArray = document.cookie.split('; ')
+    for (let cookie in cookieArray) {
+        debugger
+        if (cookieArray[cookie].includes('userid')) {
+            userID = cookieArray[cookie].split('userid=')[1]
+        } else if (cookieArray[cookie].includes('genre')) {
+            genreID = cookieArray[cookie].split('genre=')[1]
+        } else if (cookieArray[cookie].includes('genre_name')) {
+            debugger
+            genreName = cookieArray[cookie].split('genre_name=')[1]
+        } else if (cookieArray[cookie].includes('game')) {
+            gameID = cookieArray[cookie].split('game=')[1]
+        } else if (cookieArray[cookie].includes('search-term')) {
+            searchTerm = cookieArray[cookie].split('search=')[1]
+        }
+    }
+    console.log(userID,gameID,genreID,genreName,searchTerm)
+}
 
 const getGenresNav = () => {
     let myHeaders = new Headers();
@@ -84,6 +109,7 @@ const getGenreList = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     getGenreList()
+    getCookies()
     getGenresNav()
 })
 
