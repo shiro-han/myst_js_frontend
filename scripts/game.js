@@ -1,6 +1,7 @@
 const API_URL = "https://api-v3.igdb.com/games"
 const gameID = parseInt(document.cookie.split('game=')[1], 10)
 const userID = parseInt(document.cookie.split('userid=')[1], 10)
+const container = document.querySelector("#game-info");
 
 const getGameRender = (id) => {
     let myHeaders = new Headers();
@@ -56,6 +57,7 @@ const gameRailsDBChecker = (games, id) => {
     if (games.some(game => game.api_id === id))
     {
         console.log('game already exists in rails');
+        container.dataset.railsId = games.find(game => game.api_id === id).id
         getGameRender(gameID)
     }
     else {
@@ -82,14 +84,16 @@ const postGameToRails = (gameObj) => {
 
     fetch(RAILS_URL + 'games', requestOptions)
         .then(resp => resp.json())
-        .then(json => getGameRender(json.api_id))
+        .then(json => {
+            container.dataset.railsId = json.id;
+            getGameRender(json.api_id);
+        })
 }
 
 const renderGame = (game) => {
     const mainIMG = document.querySelector('#main-img')
     mainIMG.src = imgURL(game.cover.url)
 
-    const container = document.querySelector("#game-info")
     container.innerHTML = `
     <h1><u>${game.name}</u></h1>
     <div class="row">
@@ -142,6 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
     railsGames()
     addBttn = document.querySelector('#addCollection')
     addBttn.addEventListener('click', (e) => {
-        console.log(e.target)
+        if (!!userID){
+            window.location.replace('/collection.html')
+        } else {
+            window.location.replace('/login.html')
+        }
+        
     })
 })
