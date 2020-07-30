@@ -104,7 +104,7 @@ const renderGameToCommunityCarousel = (game) => {
                 <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
             </div>
             <div class="col-9">
-                <h2 class="app-text"><u>${game.name}</u></h2>
+                <h2 class="app-text"><u><a data-game-id="${game.id}" href="/game.html">${game.name}</a></u></h2>
                 <h3 class="app-text">Now Available</h3>
             </div>
         `
@@ -125,7 +125,7 @@ const renderGameToCommunityCarousel = (game) => {
                 <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
             </div>
             <div class="col-9">
-                <h2 class="app-text"><u>${game.name}</u></h2>
+            <h2 class="app-text"><u><a data-game-id="${game.id}" href="/game.html">${game.name}</a></u></h2>
                 <h3 class="app-text">Now Available</h3>
             </div>
         `
@@ -150,27 +150,6 @@ const pElement = (game, element) => {
 
 const imgURL = (url, size = 'cover_big') => {
     return 'http:' + url.replace('thumb', size)
-}
-
-const postGameToRails = (gameObj) => {
-    let myHeaders = new Headers();
-    myHeaders.append('content-type', 'application/json');
-    myHeaders.append('accept', 'application/json')
-
-    let bodyObj = {
-        name: gameObj.name,
-        api_id: gameObj.id
-    }
-
-    const requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: JSON.stringify(bodyObj)
-    }
-
-    fetch(RAILS_URL + 'games', requestOptions)
-        .then(resp => resp.json())
-        .then(json => console.log(json))
 }
 
 const addGameToCollection = (userID, railsID) => {
@@ -205,6 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.cookie = `genre=${e.target.dataset.id}`
             document.cookie = `genre_name=${e.target.innerText}`
             window.location.replace("/genre.html")
+        }
+
+        if (e.target.tagName === 'A'){
+            e.preventDefault()
+            document.cookie = `game=${e.target.dataset.gameId}`
+            window.location.replace("/game.html")
         }
     })
     
