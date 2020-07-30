@@ -1,5 +1,3 @@
-const RAILS_URL = "http://localhost:3000/users"
-
 let userList = []
 
 function getUsers() {
