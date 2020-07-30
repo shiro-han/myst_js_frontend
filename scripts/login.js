@@ -12,7 +12,7 @@ function getUsers() {
 const registerUser = (userObj) => {
     let myHeaders = new Headers();
     myHeaders.append('content-type', 'application/json');
-    myHeaders.append('accept', 'application/json')
+    myHeaders.append('accept', 'application/json');
 
     let bodyObj = {
         username: userObj.username,
@@ -47,7 +47,7 @@ formLogin.addEventListener("submit", function(e) {
         }
     }
     if (userFound === false) {
-        let errorMessage = document.getElementById('usernameHelp')
+        let errorMessage = document.getElementById('loginHelp')
         errorMessage.innerText = "That username doesn't exist. Please try again."
         errorMessage.classList.add('error');
     }
@@ -55,5 +55,5 @@ formLogin.addEventListener("submit", function(e) {
 
 formRegister.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log(e.target)
+    e.target.children;
 })
