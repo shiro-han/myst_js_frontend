@@ -72,6 +72,7 @@ const renderPage = (games) => {
 const returnGameDiv = (game) => {
     const gameDiv = document.createElement('div')
     gameDiv.className = "col-3 text-center"
+    gameDiv.dataset.id = game.id
     let a = document.createElement('a')
     a.setAttribute('href', '/game.html')
     a.innerHTML = `
@@ -87,11 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     getGamesForGenre(genreID)
     
     document.addEventListener('click', function(e) {
-        if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
-            e.preventDefault()
-            document.cookie = `genre=${e.target.dataset.id}`
-            document.cookie = `genre_name=${e.target.innerText}`
-            window.location.replace("/genre.html")
+        e.preventDefault()
+        if (e.target.classList.contains('grid-image' || 'grid-title')) {
+            document.cookie = `game=${e.target.parentElement.parentElement.dataset.id}`
+            window.location.replace('/game.html')
         }
     })
     

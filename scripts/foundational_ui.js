@@ -69,5 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.replace('/login.html')
             }
         }
+        if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
+            e.preventDefault()
+            document.cookie = `genre=${e.target.dataset.id}`
+            document.cookie = `genre_name=${e.target.innerText}`
+            window.location.replace("/genre.html")
+        }
     })
 })
