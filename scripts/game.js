@@ -159,7 +159,7 @@ const addGameToCollection = (userID, railsID) => {
 
     fetch(RAILS_URL + 'user_games', requestOptions)
         .then(resp => resp.json())
-        .then(json => console.log(json))
+        .then(json => window.location.replace('/collection.html'))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!!userID){
             let railsID = parseInt(container.dataset.railsId, 10)
             addGameToCollection(userID, railsID)
-            window.location.replace('/collection.html')
+            
         } else {
             window.location.replace('/login.html')
         }
