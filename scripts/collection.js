@@ -1,9 +1,9 @@
 const API_URL = "https://api-v3.igdb.com/games"
 const gameGrid = document.getElementById('game-grid')
-const userID = (document.cookie.split('; ')[2]).split('userid=')[1]
+const userID = document.cookie.split('userid=')[1]
 
 function getUserGames() {
-    fetch(`${RAILS_API}users/${userID}`)
+    fetch(`${RAILS_URL}users/${userID}`)
         .then(resp => resp.json())
         .then(json => {
             getGameIds(json["games"]);
@@ -20,13 +20,11 @@ function getGameIds(list) {
 }
 
 function buildGamesList(idsList) {
-    let gameInfo = []
-    for (let id in idsList) {
         let myHeaders = new Headers();
         myHeaders.append("user-key", API_KEY);
         myHeaders.append("Content-Type", "text/plain");
     
-        const raw = `fields id, cover.url, name; where id = ${idsList[id]};`;
+        const raw = `fields id, cover.url, name; where id = ${idsList.toString()};`;
     
         const requestOptions = {
             method: 'POST',
@@ -38,11 +36,9 @@ function buildGamesList(idsList) {
         fetch(CORS_URL+API_URL, requestOptions)
             .then(resp => resp.json())
             .then(json => {
-                gameInfo.push(json[0]);
+                renderPage(json);
             })
             .catch(error => console.log('error', error));
-    }
-    renderPage(gameInfo)
 }
 
 const renderPage = (games) => {
@@ -61,10 +57,7 @@ const renderPage = (games) => {
             j = 0;
         }
     }
-}
-
-const imgURL = (url, size = 'cover_big') => {
-    return 'http:' + url.replace('thumb', size)
+    gameGrid.append(newRow)
 }
 
 const returnGameDiv = (game) => {
