@@ -38,4 +38,15 @@ const renderGenresNav = (genres) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     getGenresNav()
+
+    document.addEventListener("click", function(e) {
+        if (e.target.innerText === "Library") {
+            e.preventDefault()
+            if (document.cookie.includes('username=')) {
+                window.location.replace('/collection.html')
+            } else {
+                window.location.replace('/login.html')
+            }
+        }
+    })
 })
