@@ -1,5 +1,6 @@
 const API_URL = "https://api-v3.igdb.com/games"
 const gameID = parseInt(document.cookie.split('game=')[1], 10)
+const userID = parseInt(document.cookie.split('userid=')[1], 10)
 
 const getGameRender = (id) => {
     let myHeaders = new Headers();
@@ -139,4 +140,8 @@ const renderGame = (game) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     railsGames()
+    addBttn = document.querySelector('#addCollection')
+    addBttn.addEventListener('click', (e) => {
+        console.log(e.target)
+    })
 })
