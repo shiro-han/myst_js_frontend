@@ -103,3 +103,12 @@ document.addEventListener("click", function(e) {
         window.location.replace("/genre.html")
     }
 })
+
+document.addEventListener("submit", function(e) {
+    if (e.target.classList.contains("form-inline")) {
+        e.preventDefault()
+        let search = document.querySelector('.form-control').value
+        document.cookie = `search-term=${search}`
+        window.location.replace('/search.html')
+    }
+})
