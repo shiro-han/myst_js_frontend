@@ -1,3 +1,5 @@
+const CORS_URL = 'https://damp-taiga-79758.herokuapp.com/'
+
 $(function(){
     $("#navbar").load("foundational_ui.html #navigation"); 
     $("#footer").load("foundational_ui.html #sticky-footer"); 
