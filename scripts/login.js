@@ -52,3 +52,8 @@ formLogin.addEventListener("submit", function(e) {
         errorMessage.classList.add('error');
     }
 })
+
+formRegister.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log(e.target)
+})
