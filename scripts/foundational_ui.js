@@ -85,21 +85,21 @@ const getGenreList = () => {
 document.addEventListener('DOMContentLoaded', () => {
     getGenreList()
     getGenresNav()
+})
 
-    document.addEventListener("click", function(e) {
-        if (e.target.innerText === "Library") {
-            e.preventDefault()
-            if (document.cookie.includes('userid=')) {
-                window.location.replace('/collection.html')
-            } else {
-                window.location.replace('/login.html')
-            }
+document.addEventListener("click", function(e) {
+    if (e.target.innerText === "Library") {
+        e.preventDefault()
+        if (document.cookie.includes('userid=')) {
+            window.location.replace('/collection.html')
+        } else {
+            window.location.replace('/login.html')
         }
-        if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
-            e.preventDefault()
-            document.cookie = `genre=${e.target.dataset.id}`
-            document.cookie = `genre_name=${e.target.innerText}`
-            window.location.replace("/genre.html")
-        }
-    })
+    }
+    if (genreList.map(obj => obj.name).includes(e.target.innerText)) {
+        e.preventDefault()
+        document.cookie = `genre=${e.target.dataset.id}`
+        document.cookie = `genre_name=${e.target.innerText}`
+        window.location.replace("/genre.html")
+    }
 })

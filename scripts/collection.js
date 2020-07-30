@@ -78,8 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
     getUserGames();
 
     document.addEventListener('click', function(e) {
-        e.preventDefault()
         if (e.target.classList.contains('grid-image' || 'grid-title')) {
+            e.preventDefault()
             document.cookie = `game=${e.target.parentElement.parentElement.dataset.id}`
             window.location.replace('/game.html')
         }
