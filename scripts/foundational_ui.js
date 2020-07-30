@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("click", function(e) {
         if (e.target.innerText === "Library") {
             e.preventDefault()
-            if (document.cookie.includes('username=')) {
+            if (document.cookie.includes('userid=')) {
                 window.location.replace('/collection.html')
             } else {
                 window.location.replace('/login.html')

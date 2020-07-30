@@ -1,3 +1,4 @@
+const form = document.querySelector('form')
 let userList = []
 
 function getUsers() {
@@ -9,16 +10,21 @@ function getUsers() {
 
 getUsers()
 
-document.addEventListener("submit", function(e) {
+form.addEventListener("submit", function(e) {
     e.preventDefault();
+    console.log("Clicked")
     let username = document.getElementById('username-input').value;
+    let userFound = false
     for (let user in userList) {
         if (userList[user]["username"] === username) {
+            userFound = true
             document.cookie = `userid=${userList[user]['id']}`
             window.location.replace('/collection.html')
         }
     }
-    let errorMessage = document.getElementById('usernameHelp')
-    errorMessage.innerText = "That username doesn't exist. Please try again."
-    errorMessage.classList.add('error');
+    if (userFound === false) {
+        let errorMessage = document.getElementById('usernameHelp')
+        errorMessage.innerText = "That username doesn't exist. Please try again."
+        errorMessage.classList.add('error');
+    }
 })
