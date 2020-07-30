@@ -29,15 +29,17 @@ const registerUser = (userObj) => {
 
     fetch(RAILS_URL + 'users', requestOptions)
         .then(resp => resp.json())
-        .then(json => console.log(json))
+        .then(json => {
+            document.cookie = `userid=${json.id}`
+            window.location.replace('/collection.html')
+        })
 }
 
 getUsers()
 
 formLogin.addEventListener("submit", function(e) {
     e.preventDefault();
-    console.log("Clicked")
-    let username = document.getElementById('username-input').value;
+    let username = document.getElementById('username-login').value;
     let userFound = false
     for (let user in userList) {
         if (userList[user]["username"] === username) {
@@ -55,5 +57,17 @@ formLogin.addEventListener("submit", function(e) {
 
 formRegister.addEventListener("submit", (e) => {
     e.preventDefault();
-    e.target.children;
+
+    userObj = {
+    username: document.getElementById('username-register').value,
+    email: document.getElementById('email-register').value,
+    profile_pic: document.getElementById('pic-register').value,
+    bio: document.getElementById('bio-register').value
+    }
+
+    if (!userObj.username || !userObj.email || !userObj.profile_pic || !userObj.bio) {
+        document.getElementById('registerError').innerText = "Please fill out all fields in the regsiter form."
+    } else {
+        registerUser(userObj)
+    }
 })
