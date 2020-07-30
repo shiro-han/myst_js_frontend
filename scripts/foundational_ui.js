@@ -67,6 +67,7 @@ const renderGenresNav = (genres) => {
         a.innerText = genre.name
         a.dataset.id = genre.id
         genreDropdown.append(a)
+        checkLogin()
     })
 }
 
@@ -108,6 +109,13 @@ const getGenreList = () => {
             genreList = json
         })
         .catch(error => console.log('error', error));
+}
+
+const checkLogin = () => {
+    if (!userID) {
+        let navItem = document.getElementById('library')
+        navItem.innerText = 'Log In'
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
