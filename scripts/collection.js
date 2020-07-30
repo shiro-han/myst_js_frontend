@@ -24,7 +24,7 @@ function buildGamesList(idsList) {
         myHeaders.append("user-key", API_KEY);
         myHeaders.append("Content-Type", "text/plain");
     
-        const raw = `fields id, cover.url, name; where id = ${idsList.toString()};`;
+        const raw = `fields id, cover.url, name; where id = (${idsList.toString()});`;
     
         const requestOptions = {
             method: 'POST',
