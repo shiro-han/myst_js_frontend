@@ -68,3 +68,11 @@ const returnGameDiv = (game) => {
 document.addEventListener("DOMContentLoaded", function() {
     getGamesForSearch(searchTerm)
 })
+
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('grid-image' || 'grid-title')) {
+        e.preventDefault()
+        document.cookie = `game=${e.target.parentElement.parentElement.dataset.id}`
+        window.location.replace('/game.html')
+    }
+})
