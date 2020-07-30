@@ -103,7 +103,7 @@ const renderGame = (game) => {
         </div>
     </div>
     <div class="row app-text">
-        <div id="genres" class="col-3">
+        <div id="genres" class="col">
         </div>
         <div id="platforms" class="col">
         </div>
