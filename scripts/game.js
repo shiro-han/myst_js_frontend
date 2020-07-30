@@ -93,8 +93,8 @@ const renderGame = (game) => {
     mainIMG.src = imgURL(game.cover.url)
 
     container.innerHTML = `
-    <h1><u>${game.name}</u></h1>
-    <div class="row">
+    <h1 class='app-text'>${game.name}</h1>
+    <div class="row app-text">
         <div class="col-3">
             <p>Average Rating: <span class="badge badge-success">${Math.floor(game.aggregated_rating)}</span></p>
         </div>
@@ -102,14 +102,14 @@ const renderGame = (game) => {
             <p>Release Date: ${game.first_release_date}</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row app-text">
         <div id="genres" class="col-3">
         </div>
         <div id="platforms" class="col">
         </div>
     </div>
-    <p><u>Summary:</u></p>
-    <p>${game.summary}</p>
+    <p class='app-text'><u>Summary:</u></p>
+    <p class='app-text'>${game.summary}</p>
     `
     let genres = container.querySelector('#genres')
     genres.appendChild(pElement(game, 'genres'))
@@ -119,8 +119,10 @@ const renderGame = (game) => {
     if (!!game.storyline){
         let slHead = document.createElement('p')
         slHead.innerHTML='<u>Story Line:</u>'
+        slHead.className = 'app-text'
         slBody = document.createElement('p')
         slBody.innerText = game.storyline
+        slBody.className = 'app-text'
         container.append(slHead, slBody)
     }
 
