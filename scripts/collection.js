@@ -1,10 +1,9 @@
 const API_URL = "https://api-v3.igdb.com/games"
-const RAILS_API = "http://localhost:3000/users"
 const gameGrid = document.getElementById('game-grid')
 const userID = (document.cookie.split('; ')[2]).split('userid=')[1]
 
 function getUserGames() {
-    fetch(`${RAILS_API}/${userID}`)
+    fetch(`${RAILS_API}users/${userID}`)
         .then(resp => resp.json())
         .then(json => {
             getGameIds(json["games"]);

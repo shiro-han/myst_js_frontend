@@ -1,7 +1,7 @@
 let userList = []
 
 function getUsers() {
-    fetch(RAILS_URL)
+    fetch(`${RAILS_URL}users`)
         .then(resp => resp.json())
         .then(json => userList = json)
         .catch(error => console.log('error', error))
