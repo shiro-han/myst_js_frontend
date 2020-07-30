@@ -145,10 +145,6 @@ const pElement = (game, element) => {
     return p;
 }
 
-const imgURL = (url, size = 'cover_big') => {
-    return 'http:' + url.replace('thumb', size)
-}
-
 const addGameToCollection = (userID, railsID) => {
     let myHeaders = new Headers();
     myHeaders.append('content-type', 'application/json');
@@ -183,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.replace("/genre.html")
         }
 
-        if (e.target.tagName === 'A'){
+        if (!!e.target.dataset.gameId){
             e.preventDefault()
             document.cookie = `game=${e.target.dataset.gameId}`
             window.location.replace("/game.html")

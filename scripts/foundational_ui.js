@@ -40,6 +40,10 @@ const renderGenresNav = (genres) => {
     })
 }
 
+const imgURL = (url, size = 'cover_big') => {
+    return 'http:' + url.replace('thumb', size)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     getGenresNav()
 
