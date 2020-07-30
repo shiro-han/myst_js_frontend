@@ -2,14 +2,13 @@ const API_URL = "https://api-v3.igdb.com/games"
 const gameGrid = document.getElementById('game-grid')
 
 console.log(document.cookie)
-let searchTerm = document.cookie.split('search-term=')[1]
 
 const getGamesForSearch = (searchTerm) => {
     let myHeaders = new Headers();
     myHeaders.append("user-key", API_KEY);
     myHeaders.append("Content-Type", "text/plain");
 
-    const raw = `fields game.id, game.name, game.cover.url; search "${searchTerm}"; where themes != (42); limit 50; where game.category = 0;`;
+    const raw = `fields game.id, game.name, game.cover.url; search "${searchTerm}"; limit 50; where game.category = 0;`;
 
     const requestOptions = {
     method: 'POST',
@@ -21,7 +20,6 @@ const getGamesForSearch = (searchTerm) => {
     fetch(CORS_URL + "https://api-v3.igdb.com/search/", requestOptions)
         .then(resp => resp.json())
         .then(json => {
-            // debugger
             renderPage(json)
         })
         .catch(error => console.log('error', error));

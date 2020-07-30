@@ -1,6 +1,4 @@
 const API_URL = "https://api-v3.igdb.com/games"
-const gameID = parseInt(document.cookie.split('game=')[1], 10)
-const userID = parseInt(document.cookie.split('userid=')[1], 10)
 const container = document.querySelector("#game-info");
 
 const getGameRender = (id) => {

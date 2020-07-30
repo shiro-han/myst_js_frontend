@@ -2,8 +2,6 @@ const API_URL = "https://api-v3.igdb.com/games"
 const gameGrid = document.getElementById('game-grid')
 
 console.log(document.cookie)
-let genreID = parseInt(document.cookie.split('genre=')[1], 10)
-let genreName = document.cookie.split('genre_name=')[1]
 
 const getGamesForGenre = (genreID) => {
     let myHeaders = new Headers();

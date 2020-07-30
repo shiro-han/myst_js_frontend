@@ -7,7 +7,7 @@ let gameID;
 let genreID;
 let genreName;
 let searchTerm;
-let genreList = []
+// let genreList = []
 
 $(function(){
     $("#navbar").load("foundational_ui.html #navigation"); 
@@ -15,23 +15,26 @@ $(function(){
 });
 
 function getCookies() {
-    let cookieArray = document.cookie.split('; ')
-    for (let cookie in cookieArray) {
-        debugger
-        if (cookieArray[cookie].includes('userid')) {
-            userID = cookieArray[cookie].split('userid=')[1]
-        } else if (cookieArray[cookie].includes('genre')) {
-            genreID = cookieArray[cookie].split('genre=')[1]
-        } else if (cookieArray[cookie].includes('genre_name')) {
-            debugger
-            genreName = cookieArray[cookie].split('genre_name=')[1]
-        } else if (cookieArray[cookie].includes('game')) {
-            gameID = cookieArray[cookie].split('game=')[1]
-        } else if (cookieArray[cookie].includes('search-term')) {
-            searchTerm = cookieArray[cookie].split('search=')[1]
+    if (document.cookie) {
+        cookieArray = document.cookie.split(';')
+        for (let i = 0; i < cookieArray.length; i++) {
+            if (cookieArray[i].includes('game')) {
+                gameID = parseInt(cookieArray[i].split('=')[1])
+            }
+            if (cookieArray[i].includes('genre=')) {
+                genreID = cookieArray[i].split('=')[1]
+            }
+            if (cookieArray[i].includes('genre_name')) {
+                genreName = cookieArray[i].split('=')[1]
+            }
+            if (cookieArray[i].includes('search-term')) {
+                searchTerm = cookieArray[i].split('=')[1]
+            }
+            if (cookieArray[i].includes('userid')) {
+                userID = parseInt(cookieArray[i].split('=')[1])
+            }
         }
     }
-    console.log(userID,gameID,genreID,genreName,searchTerm)
 }
 
 const getGenresNav = () => {
