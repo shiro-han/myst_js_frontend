@@ -69,10 +69,6 @@ const renderPage = (games) => {
     }
 }
 
-const imgURL = (url, size = 'cover_big') => {
-    return 'http:' + url.replace('thumb', size)
-}
-
 const returnGameDiv = (game) => {
     const gameDiv = document.createElement('div')
     gameDiv.className = "col-3 text-center"
