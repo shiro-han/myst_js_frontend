@@ -30,6 +30,7 @@ const renderPage = (games) => {
     let n = 4;
     let title = document.querySelector('.genre-title')
     title.innerText = genreName
+    title.dataset.id = genreID
     let newRow = document.createElement('div')
     newRow.className = 'row';
     for (let i=0; i < games.length; i++) {
