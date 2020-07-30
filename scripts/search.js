@@ -1,5 +1,6 @@
 const API_URL = "https://api-v3.igdb.com/games"
 const gameGrid = document.getElementById('game-grid')
+const searchTitle = document.querySelector('.search-title')
 
 console.log(document.cookie)
 
@@ -26,6 +27,7 @@ const getGamesForSearch = (searchTerm) => {
 }
 
 const renderPage = (games) => {
+    searchTitle.innerHTML = `Results For: "${searchTerm}"`
     let j = 0;
     let n = 4;
     let newRow = document.createElement('div')
