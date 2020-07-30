@@ -99,7 +99,7 @@ const renderGame = (game) => {
             <p>Average Rating: <span class="badge badge-success">${Math.floor(game.aggregated_rating)}</span></p>
         </div>
         <div class="col">
-            <p>Release Date: ${game.first_release_date}</p>
+            <p>Release Date: ${convertDate(game.first_release_date)}</p>
         </div>
     </div>
     <div class="row app-text">
@@ -160,6 +160,12 @@ const addGameToCollection = (userID, railsID) => {
     fetch(RAILS_URL + 'user_games', requestOptions)
         .then(resp => resp.json())
         .then(json => window.location.replace('/collection.html'))
+}
+
+const convertDate = (date) => {
+    let readDate = new Date(date * 1000)
+    let showDate = `${readDate.getMonth() + 1}/${readDate.getDate()}/${readDate.getFullYear()}`
+    return showDate
 }
 
 document.addEventListener('DOMContentLoaded', () => {
