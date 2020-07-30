@@ -10,7 +10,7 @@ const getGamesForGenre = (genreID) => {
     myHeaders.append("user-key", API_KEY);
     myHeaders.append("Content-Type", "text/plain");
 
-    const raw = `fields id, cover.url, name, genres; where genres = (${genreID}); where themes != (42); limit 25; sort popularity desc;`;
+    const raw = `fields id, cover.url, name, genres; where genres = (${genreID}) & themes != (42); limit 25; sort popularity desc;`;
 
     const requestOptions = {
     method: 'POST',
@@ -21,7 +21,9 @@ const getGamesForGenre = (genreID) => {
 
     fetch(CORS_URL + "https://api-v3.igdb.com/games/", requestOptions)
         .then(resp => resp.json())
-        .then(json => renderPage(json))
+        .then(json => {
+            renderPage(json)
+        })
         .catch(error => console.log('error', error));
 }
 
@@ -60,7 +62,6 @@ const returnGameDiv = (game) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    getGenreList()
     getGamesForGenre(genreID)
     
     document.addEventListener('click', function(e) {
