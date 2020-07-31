@@ -154,6 +154,29 @@ const renderGame = (game) => {
         `
         carousel.appendChild(div)
     })
+
+    const recommended = document.querySelector('#game-grid')
+    let newRow = document.createElement('div')
+    newRow.className = 'row';
+    for (let i = 0; i < 4; i++) {
+        let newDiv = returnGameDiv(game['similar_games'][i]);
+        newRow.append(newDiv);
+    }
+    recommended.append(newRow);
+}
+
+const returnGameDiv = (game) => {
+    const gameDiv = document.createElement('div')
+    gameDiv.className = "col-3 text-center"
+    gameDiv.dataset.id = game.id
+    let a = document.createElement('a')
+    a.setAttribute('href', '/game.html')
+    a.innerHTML = `
+        <img class="grid-image" src="${imgURL(game.cover.url)}" style="width: 10rem;">
+        <p class ="grid-title">${game.name}</p>
+    `
+    gameDiv.appendChild(a)
+    return gameDiv
 }
 
 const addGameToCollection = (userID, railsID) => {
