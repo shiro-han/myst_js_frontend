@@ -57,6 +57,10 @@ border-radius: 15px;
 .card-text {
  font-size: 2rem;
 }
+.genre-badge:hover {
+  border: solid 1px #FFF;
+  cursor: pointer;
+}
 
 #page-content {
   flex: 1 0 auto;

@@ -80,7 +80,7 @@ const pElement = (game, attr) => {
     p.innerText = `${attr.charAt(0).toUpperCase() + attr.slice(1)}: `
     game[attr].forEach(element => {
         let span = document.createElement('span');
-        span.className = 'badge badge-secondary'
+        span.className = 'badge badge-secondary genre-badge'
         span.innerText = element.name
         span.dataset.id = element.id
         p.appendChild(span);
