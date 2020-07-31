@@ -48,7 +48,7 @@ const renderPage = (games) => {
 
 const returnGameDiv = (game) => {
     const gameDiv = document.createElement('div')
-    gameDiv.className = "col-3 text-center my-auto"
+    gameDiv.className = "col-3 text-center my-auto zoom"
     gameDiv.dataset.id = game.id
     let a = document.createElement('a')
     a.setAttribute('href', '/game.html')
