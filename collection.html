@@ -12,9 +12,30 @@
 
     <body class="d-flex flex-column h-100">
         <div id="navbar"></div>
-        <div id="page-content">  
-            <div class="container pt-5 mt-5" id="game-page">
-                <h1 class="app-text">Your Collection</h1>
+        <div id="page-content">
+            <div class ="container pt-5 mt-1"></div> <!---couldn't figure out spacing so added extra div-->
+            <div class="container my-auto">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-lg-8 col-md-6">
+                                        <h3 class="mb-0 text-truncated app-text" id="username"></h3>
+                                        <p class="lead app-text">Owns <span id="game-number"></span> Games</p>
+                                        <p id="bio" class="app-text"></p>
+                                    </div>
+                                    <div class="col-12 col-lg-4 col-md-6 text-center">
+                                        <img id="profile-pic" class="mx-auto rounded-circle img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container pt-3 mt-5" id="game-page">
+                <h1 class="app-text" id="collect-header">Your Collection</h1>
                 <div class="container pt-3 mt-3" id="game-grid">
                 </div>
             </div>

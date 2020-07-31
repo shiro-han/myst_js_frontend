@@ -5,17 +5,22 @@ function getUserGames() {
     fetch(`${RAILS_URL}users/${userID}`)
         .then(resp => resp.json())
         .then(json => {
+            renderUser(json);
             getGameIds(json["games"]);
         })
         .catch(error => console.log('error', error))
 }
 
 function getGameIds(list) {
-    let gameIDS = []
-    for (let game in list) {
-        gameIDS.push(list[game]['api_id'])
+    if (!!list[0]){
+        let gameIDS = []
+        for (let game in list) {
+            gameIDS.push(list[game]['api_id'])
+        }
+        buildGamesList(gameIDS)
+    } else {
+        document.getElementById('collect-header').innerText = `No Games Found In Collection`
     }
-    buildGamesList(gameIDS)
 }
 
 function buildGamesList(idsList) {
@@ -71,6 +76,13 @@ const returnGameDiv = (game) => {
     `
     gameDiv.appendChild(a)
     return gameDiv
+}
+
+const renderUser = (user) => {
+    document.getElementById('username').innerText = user.username;
+    document.getElementById('profile-pic').src = user.profile_pic;
+    document.getElementById('bio').innerText = user.bio;
+    document.getElementById('game-number').innerText = user.games.length;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
