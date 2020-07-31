@@ -140,6 +140,7 @@ document.addEventListener("click", function(e) {
         if (document.cookie.includes('userid=')) {
             window.location.replace('/collection.html')
         } else {
+            document.cookie = "error=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
             window.location.replace('/login.html')
         }
     }
