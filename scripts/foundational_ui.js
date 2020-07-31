@@ -7,6 +7,7 @@ let gameID;
 let genreID;
 let genreName;
 let searchTerm;
+let errorMessage;
 // let genreList = []
 
 $(function(){
@@ -32,6 +33,9 @@ function getCookies() {
             }
             if (cookieArray[i].includes('userid')) {
                 userID = parseInt(cookieArray[i].split('=')[1])
+            }
+            if (cookieArray[i].includes('error')) {
+                errorMessage = cookieArray[i].split('=')[1];
             }
         }
     }
