@@ -87,6 +87,7 @@ border-radius: 15px;
 #sticky-footer {
   flex-shrink: none;
   background-color: #171a21;
+  padding-top: 3rem;
 }
 
 #navigation {
