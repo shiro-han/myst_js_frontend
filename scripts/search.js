@@ -43,6 +43,7 @@ const renderPage = (games) => {
             j = 0;
         }
     }
+    gameGrid.append(newRow)
 }
 
 const returnGameDiv = (game) => {
