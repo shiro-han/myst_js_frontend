@@ -45,6 +45,7 @@ formLogin.addEventListener("submit", function(e) {
         if (userList[user]["username"] === username) {
             userFound = true
             document.cookie = `userid=${userList[user]['id']}`
+            document.cookie = "error=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
             window.location.replace('/collection.html')
         }
     }
@@ -68,6 +69,13 @@ formRegister.addEventListener("submit", (e) => {
     if (!userObj.username || !userObj.email || !userObj.profile_pic || !userObj.bio) {
         document.getElementById('registerError').innerText = "Please fill out all fields in the regsiter form."
     } else {
+        document.cookie = "error=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         registerUser(userObj)
+    }
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!!errorMessage) {
+        document.getElementById('error').innerText = "You can't perform that action unless you are logged in. Please try again once you are logged in."
     }
 })

@@ -237,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 addGameToCollection(userID, railsID);
             }
         } else {
+            document.cookie = `error=notloggedin`
             window.location.replace('/login.html')
         }
         
