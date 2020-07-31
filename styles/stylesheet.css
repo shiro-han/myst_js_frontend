@@ -68,6 +68,10 @@ border-radius: 15px;
   flex-wrap: wrap;
 }
 
+.quick-radius {
+  border-radius: 15px;
+}
+
 #page-content {
   flex: 1 0 auto;
 }
