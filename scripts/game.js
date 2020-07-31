@@ -1,5 +1,6 @@
 const API_URL = "https://api-v3.igdb.com/games"
 const container = document.querySelector("#game-info");
+const addBttn = document.querySelector('#addCollection')
 
 const getGameRender = (id) => {
     let myHeaders = new Headers();
@@ -55,13 +56,21 @@ const gameRailsDBChecker = (games, id) => {
     if (games.some(game => game.api_id === id))
     {
         console.log('game already exists in rails');
-        container.dataset.railsId = games.find(game => game.api_id === id).id
-        getGameRender(gameID)
+        let displayedGame = games.find(game => game.api_id === id);
+        container.dataset.railsId = displayedGame.id;
+        if (gameOwnedChecker(displayedGame.users)) {
+            document.querySelector('#addCollection').dataset.owned = true
+        }
+        getGameRender(gameID);
     }
     else {
-        console.log('uploading game to rails')
-        getGamePost(gameID)
+        console.log('uploading game to rails');
+        getGamePost(gameID);
     }
+}
+
+const gameOwnedChecker = (users) => {
+    return users.map(user => user.id).some(id => id === userID)
 }
 
 const postGameToRails = (gameObj) => {
@@ -89,6 +98,12 @@ const postGameToRails = (gameObj) => {
 }
 
 const renderGame = (game) => {
+    if (addBttn.dataset.owned === "true") {
+        console.log('game in collection')
+        addBttn.className = "btn btn-danger float-right"
+        addBttn.innerText = "Remove From Collection"
+    }
+
     const mainIMG = document.querySelector('#main-img')
     mainIMG.src = imgURL(game.cover.url)
 
@@ -162,6 +177,10 @@ const addGameToCollection = (userID, railsID) => {
         .then(json => window.location.replace('/collection.html'))
 }
 
+const removeGameFromCollection = (userID, railsID) => {
+    console.log('removing game', userID, railsID)
+}
+
 const convertDate = (date) => {
     let readDate = new Date(date * 1000)
     let showDate = `${readDate.getMonth() + 1}/${readDate.getDate()}/${readDate.getFullYear()}`
@@ -170,11 +189,14 @@ const convertDate = (date) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     railsGames()
-    addBttn = document.querySelector('#addCollection')
     addBttn.addEventListener('click', (e) => {
         if (!!userID){
             let railsID = parseInt(container.dataset.railsId, 10)
-            addGameToCollection(userID, railsID)
+            if (addBttn.dataset.owned === "true") {
+                removeGameFromCollection(userID, railsID);
+            } else {
+                addGameToCollection(userID, railsID);
+            }
         } else {
             window.location.replace('/login.html')
         }
