@@ -67,8 +67,8 @@ const renderGenresNav = (genres) => {
         a.innerText = genre.name
         a.dataset.id = genre.id
         genreDropdown.append(a)
-        checkLogin()
     })
+    checkLogin()
 }
 
 const imgURL = (url, size = 'cover_big') => {
@@ -115,6 +115,12 @@ const checkLogin = () => {
     if (!userID) {
         let navItem = document.getElementById('library')
         navItem.innerText = 'Log In'
+    } else {
+        let navItemContainer = document.querySelector('.navbar-nav')
+        let logOut = document.createElement('li')
+        logOut.className = 'nav-item active'
+        logOut.innerHTML = `<a id="log-out" class="nav-link" href="/">Logout</a>`
+        navItemContainer.append(logOut)
     }
 }
 
@@ -138,6 +144,11 @@ document.addEventListener("click", function(e) {
         document.cookie = `genre=${e.target.dataset.id}`
         document.cookie = `genre_name=${e.target.innerText}`
         window.location.replace("/genre.html")
+    }
+    if (e.target.innerText === "Logout") {
+        e.preventDefault();
+        document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        location.reload();
     }
 })
 
