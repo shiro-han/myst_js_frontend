@@ -167,7 +167,7 @@ const renderGame = (game) => {
 
 const returnGameDiv = (game) => {
     const gameDiv = document.createElement('div')
-    gameDiv.className = "col-3 text-center"
+    gameDiv.className = "col-3 text-center zoom"
     gameDiv.dataset.id = game.id
     let a = document.createElement('a')
     a.setAttribute('href', '/game.html')
@@ -240,5 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.replace('/login.html')
         }
         
+    })
+
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('grid-image' || 'grid-title')) {
+            e.preventDefault()
+            document.cookie = `game=${e.target.parentElement.parentElement.dataset.id}`
+            window.location.replace('/game.html')
+        }
     })
 })
