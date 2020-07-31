@@ -65,48 +65,29 @@ const getPopularGames = () => {
 
 const renderGameToCommunityCarousel = (game) => {
     const carousel = document.querySelector('#community-carousel')
+    let item = document.createElement('div');
     if (!carousel.children[0]) {
-        let item = document.createElement('div');
         item.className = 'carousel-item active'
-        let container = document.createElement('div')
-        container.className = 'container'
-        item.appendChild(container)
-        let row = document.createElement('div')
-        row.className = 'row app-text'
-        row.innerHTML = `
-            <div class="col-3">
-                <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
-            </div>
-            <div class="col-9 my-auto pl-5">
-                <h2 class="app-text"><a class='app-text' data-game-id="${game.id}" href="/game.html">${game.name}</a></h2>
-                <h4 class="app-text">Now Available</h4>
-            </div>
-        `
-        row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
-        container.appendChild(row)
-        carousel.appendChild(item)
-    }
-    else {
-        let item = document.createElement('div');
+    } else {
         item.className = 'carousel-item'
-        let container = document.createElement('div')
-        container.className = 'container'
-        item.appendChild(container)
-        let row = document.createElement('div')
-        row.className = 'row app-text'
-        row.innerHTML = `
-            <div class="col-3">
-                <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
-            </div>
-            <div class="col-9 my-auto pl-5">
+    }
+    let container = document.createElement('div')
+    container.className = 'container'
+    item.appendChild(container)
+    let row = document.createElement('div')
+    row.className = 'row app-text'
+    row.innerHTML = `
+        <div class="col-3">
+            <img src= ${imgURL(game.cover.url)} class="d-block w-150" alt="Game cover">
+        </div>
+        <div class="col-9 my-auto pl-5">
             <h2 class="app-text"><a class='app-text' data-game-id="${game.id}" href="/game.html">${game.name}</a></h2>
             <h4 class="app-text">Now Available</h4>
-            </div>
-        `
-        row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
-        container.appendChild(row)
-        carousel.appendChild(item)
-    }
+        </div>
+    `
+    row.children[1].append(pElement(game, 'genres'), pElement(game, 'platforms'))
+    container.appendChild(row)
+    carousel.appendChild(item)
 }
 
 document.addEventListener('DOMContentLoaded', () => {

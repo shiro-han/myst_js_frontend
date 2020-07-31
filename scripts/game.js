@@ -99,7 +99,7 @@ const postGameToRails = (gameObj) => {
 
 const renderGame = (game) => {
     if (addBttn.dataset.owned === "true") {
-        console.log('game in collection')
+        document.getElementById('collectHeader').innerText = "Game Already In Collection"
         addBttn.className = "btn btn-danger float-right"
         addBttn.innerText = "Remove From Collection"
     }
