@@ -177,8 +177,24 @@ const addGameToCollection = (userID, railsID) => {
         .then(json => window.location.replace('/collection.html'))
 }
 
-const removeGameFromCollection = (userID, railsID) => {
-    console.log('removing game', userID, railsID)
+const fetchUserGames = () => {
+    fetch(RAILS_URL + 'user_games')
+        .then(resp => resp.json())
+        .then(json => findUserGame(json))
+}
+
+const findUserGame = (userGames) => {
+    console.log(userGames)
+    let railsID = parseInt(container.dataset.railsId, 10)
+    let output = userGames.find(userGame => userGame.user_id === userID && userGame.game_id === railsID)
+    removeGameFromCollection(parseInt(output.id, 10))
+}
+
+const removeGameFromCollection = (id) => {
+    fetch(RAILS_URL + 'user_games' + `/${id}`, {
+        method: 'DELETE'
+    }).then(resp => resp.json())
+    .then(data => window.location.replace('/collection.html'))
 }
 
 const convertDate = (date) => {
@@ -193,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!!userID){
             let railsID = parseInt(container.dataset.railsId, 10)
             if (addBttn.dataset.owned === "true") {
-                removeGameFromCollection(userID, railsID);
+                fetchUserGames()
             } else {
                 addGameToCollection(userID, railsID);
             }
